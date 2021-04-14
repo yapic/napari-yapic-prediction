@@ -39,7 +39,8 @@ from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_pr
 from magicgui import magicgui
 from pathlib import Path
 
-def mywidget(viewer):
+
+def mywidget(napari_viewer):
     # make some widgets
     file_picker = FileEdit(label='Model file path:', value='')
     label = Label(label='Uploaded model:', value=file_picker.value)
@@ -52,7 +53,7 @@ def mywidget(viewer):
 
     def prediction(event):
         progress.visible = True
-        yapic_prediction(file_picker.value, viewer, progress)
+        yapic_prediction(file_picker.value, napari_viewer, progress)
             
 
     file_picker.changed.connect(set_label)
