@@ -6,7 +6,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 
 Replace code below according to your needs.
 """
-from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton
+from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
 from napari_plugin_engine import napari_hook_implementation
 
 class MyWidget(QWidget):
@@ -20,9 +20,14 @@ class MyWidget(QWidget):
         # add a button
         btn = QPushButton('Click me!', self)
         def trigger():
-            print("napari has", len(napari_viewer.layers), "layers")
+            return 'hola.h5'
         btn.clicked.connect(trigger)
+        
+        model_name = QLabel()
+        model_name.setText('Selected model: {}'.format())
+        
         layout.addWidget(btn)
+        layout.addWidget(model_name)
 
         # activate layout
         self.setLayout(layout)
