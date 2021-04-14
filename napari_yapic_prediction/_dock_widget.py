@@ -32,7 +32,6 @@ class MyWidget(QWidget):
         btn2 = QPushButton('Predict', self)
         btn2.clicked.connect(self.predict)
         
-        self.horizontalGroupBox = QGroupBox()
         progress_layout = QHBoxLayout()
         self.progres_label = QLabel('Mapping:')
         self.progress = QProgressBar()
