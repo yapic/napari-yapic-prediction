@@ -41,7 +41,6 @@ from pathlib import Path
 from napari import Viewer
 
 
-@magicgui
 def mywidget(napari_viewer: Viewer):
     # make some widgets
     file_picker = FileEdit(label='Model file path:', value='')
