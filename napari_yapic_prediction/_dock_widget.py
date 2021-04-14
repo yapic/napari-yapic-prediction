@@ -104,7 +104,7 @@ def mywidget(napari_viewer: napari.viewer.Viewer):
 
     # create a container to hold the widgets:
     container = Container(widgets=[file_picker, label, button, progress])
-    return container, {'area':'left'}
+    return container
 
 class MyGui(FunctionGui):
     def __init__(self):
