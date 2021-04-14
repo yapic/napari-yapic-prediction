@@ -25,7 +25,7 @@ class MyWidget(QWidget):
         btn1 = QPushButton('Upload a YAPiC Model', self)
         btn1.clicked.connect(self.load_model)
         
-        self.model_name = QLabel()
+        self.model_name = QLabel('Selected Model:')
         
         btn2 = QPushButton('Predict', self)
         btn2.clicked.connect(self.predict)
@@ -40,7 +40,8 @@ class MyWidget(QWidget):
     def load_model(self):
         file_name, _ = QFileDialog.getOpenFileName(self, 'Select Model File', 'Model files (*.h5)')
         self.model_path = Path(file_name)
-        self.model_name.setText('Selected model: {}'.format(self.model_path.name))
+        # self.model_name.setText('Selected model: {}'.format(self.model_path.name))
+        self.model_name.setText('{}'.format(self.model_path.name))
         
     def predict(self):
         yapic_prediction(self.model_path, self.viewer, None)
