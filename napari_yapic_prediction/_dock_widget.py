@@ -20,7 +20,7 @@ class MyWidget(QWidget):
         # add a button
         btn = QPushButton('Click me!', self)
         def load_model():
-            file_name, _ = QFileDialog.getOpenFileName(self, 'pollo')
+            file_name, _ = QFileDialog.getOpenFileName(self, 'Open Image File', r"<Default dir>", "Image files (*.jpg *.jpeg *.gif)")
             model_name.setText('Selected model: {}'.format('hola'))
             return 'hola.h5'
         btn.clicked.connect(>)
