@@ -7,7 +7,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 Replace code below according to your needs.
 """
 from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar, QHBoxLayout, QGroupBox
 from napari_plugin_engine import napari_hook_implementation
 from pathlib import Path
 from PyQt5 import QtCore
@@ -32,17 +32,20 @@ class MyWidget(QWidget):
         btn2 = QPushButton('Predict', self)
         btn2.clicked.connect(self.predict)
         
+        self.horizontalGroupBox = QGroupBox()
         progress_layout = QHBoxLayout()
         self.progres_label = QLabel('Mapping:')
         self.progress = QProgressBar()
         progress_layout.addWidget(self.progres_label)
         progress_layout.addWidget(self.progress)
         
+        self.horizontalGroupBox.setLayout(progress_layout)
+        
         
         layout.addWidget(btn1)
         layout.addWidget(self.model_name)
         layout.addWidget(btn2)
-        layout.addWidget(progress_layout)
+        layout.addWidget(self.horizontalGroupBox)
 
         # activate layout
         self.setLayout(layout)
