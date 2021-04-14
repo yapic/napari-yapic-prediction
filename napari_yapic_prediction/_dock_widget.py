@@ -20,11 +20,11 @@ class MyWidget(QWidget):
         # add a button
         btn = QPushButton('Click me!', self)
         def trigger():
+            model_name.setText('Selected model: {}'.format('hola'))
             return 'hola.h5'
         btn.clicked.connect(trigger)
         
         model_name = QLabel()
-        model_name.setText('Selected model: {}'.format(trigger()))
         
         layout.addWidget(btn)
         layout.addWidget(model_name)
