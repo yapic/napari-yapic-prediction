@@ -75,14 +75,41 @@
 
 from magicgui.widgets import FunctionGui
 from napari_plugin_engine import napari_hook_implementation
+from magicgui.widgets import FileEdit, Label, Container, ProgressBar, PushButton
+from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
+from magicgui import magicgui, magic_factory
+from pathlib import Path
+from napari import Viewer
+import napari
 
-def my_function():
-    pass
+
+def mywidget(napari_viewer: napari.viewer.Viewer):
+    # make some widgets
+    file_picker = FileEdit(label='Model file path:', value='')
+    label = Label(label='Uploaded model:', value=file_picker.value)
+    button = PushButton(label='Predict')
+    progress = ProgressBar(label='Prediction mapping:', visible=False, value = 0, min = 0, max=1)
+
+    #set up callbacks
+    def set_label(event):
+        label.value = file_picker.value.name
+
+    def prediction(event):
+        progress.visible = True
+        yapic_prediction(file_picker.value, napari_viewer, progress)
+
+
+    file_picker.changed.connect(set_label)
+    button.changed.connect(prediction)
+
+    # create a container to hold the widgets:
+    container = Container(widgets=[file_picker, label, button, progress])
+    return container, {'area':'left'}
 
 class MyGui(FunctionGui):
     def __init__(self):
         super().__init__(
-          my_function,
+          mywidget,
           call_button=True,
           layout='vertical',
           param_options={...}
