@@ -7,7 +7,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 Replace code below according to your needs.
 """
 from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
-from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar, QGroupBox
+from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar, QHBoxLayout
 from napari_plugin_engine import napari_hook_implementation
 from pathlib import Path
 from PyQt5 import QtCore
