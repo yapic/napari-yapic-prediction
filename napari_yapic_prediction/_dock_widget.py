@@ -38,10 +38,11 @@ from magicgui.widgets import FileEdit, Label, Container, ProgressBar, PushButton
 from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
 from magicgui import magicgui
 from pathlib import Path
-import napari
+from napari import Viewer
 
 
-def mywidget(napari_viewer: napari.viewer.Viewer):
+@magicgui
+def mywidget(napari_viewer: Viewer):
     # make some widgets
     file_picker = FileEdit(label='Model file path:', value='')
     label = Label(label='Uploaded model:', value=file_picker.value)
