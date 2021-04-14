@@ -28,8 +28,8 @@ def yapic_prediction(model_path, viewer, progress_bar):
     s.set_normalization('local')
     s.predict(True, progress_bar)
     
-    # progress_bar.label = 'Uploading labels:'
-    # progress_bar.value = 0
+    progress_bar.label = 'Uploading labels:'
+    progress_bar.value = 0
     
     # Adding to Napari
     files2upload = os.listdir(tmp_dir)
@@ -41,7 +41,7 @@ def yapic_prediction(model_path, viewer, progress_bar):
         label_data = tif_2_layer(file_path)
         viewer.add_labels(label_data, name='{}_prediction'.format(label_name))
         os.remove(file_path)
-        # progress_bar.value = (i + 1) / N
+        progress_bar.value = (i + 1) / N
         
     # Deleting temporal folder
     os.rmdir(tmp_dir)

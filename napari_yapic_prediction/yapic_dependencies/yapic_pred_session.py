@@ -45,9 +45,7 @@ class NapariSession(Session):
         print('multichannel output: {}'.format(data_predict.multichannel))
 
         for item_nr, item in enumerate(data_predict):
-            
-            # progress_bar.value = (item_nr + 1) / len(data_predict)
-            
+            progress_bar.value = (item_nr + 1) / len(data_predict)
             # msg = ('Writing probability map tile'
             #        ' {} of {}...\n'.format(item_nr+1,
             #                                len(data_predict)))

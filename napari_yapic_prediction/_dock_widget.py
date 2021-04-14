@@ -44,42 +44,33 @@ from pathlib import Path
 from napari import Viewer
 import napari
 
-# def mywidget(napari_viewer: napari.viewer.Viewer):
-#     # make some widgets
-#     file_picker = FileEdit(label='Model file path:', value='')
-#     label = Label(label='Uploaded model:', value=file_picker.value)
-#     button = PushButton(label='Predict')
-#     progress = ProgressBar(label='Prediction mapping:', visible=False, value = 0, min = 0, max=1)
+def mywidget(napari_viewer: napari.viewer.Viewer):
+    # make some widgets
+    file_picker = FileEdit(label='Model file path:', value='')
+    label = Label(label='Uploaded model:', value=file_picker.value)
+    button = PushButton(label='Predict')
+    progress = ProgressBar(label='Prediction mapping:', visible=False, value = 0, min = 0, max=1)
 
-#     #set up callbacks
-#     def set_label(event):
-#         label.value = file_picker.value.name
+    #set up callbacks
+    def set_label(event):
+        label.value = file_picker.value.name
 
-#     def prediction(event):
-#         progress.visible = True
-#         yapic_prediction(file_picker.value, napari_viewer, progress)
+    def prediction(event):
+        progress.visible = True
+        yapic_prediction(file_picker.value, napari_viewer, progress)
             
 
-#     file_picker.changed.connect(set_label)
-#     button.changed.connect(prediction)
+    file_picker.changed.connect(set_label)
+    button.changed.connect(prediction)
 
-#     # create a container to hold the widgets:
-#     container = Container(widgets=[file_picker, label, button, progress])
-#     return container, {'area':'left'}
-
-# @napari_hook_implementation
-# def napari_experimental_provide_dock_widget():
-#     return mywidget
-
-# _________________________________________________________________
-
-@magicgui(call_button="Predict", layout="vertical",
-          filename={"label": "Select a model:"},
-          progress={'widget_type': "ProgressBar", 'label': 'Prediction mapping:', 'visible': True, 'min': 0, 'max': 1})
-def test_func(napari_viewer: Viewer, filename=Path.home(), progress: ProgressBar = 0):
-    yapic_prediction(filename, napari_viewer, None)
-    return None
+    # create a container to hold the widgets:
+    container = Container(widgets=[file_picker, label, button, progress])
+    return container, {'area':'left'}
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
-    return test_func
+    return mywidget
+
+# _________________________________________________________________
+
+
