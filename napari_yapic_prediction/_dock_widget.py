@@ -6,7 +6,7 @@
 
 # Replace code below according to your needs.
 # """
-from napari_plugin_engine import napari_hook_implementation
+# from napari_plugin_engine import napari_hook_implementation
 # from qtpy.QtWidgets import QWidget, QHBoxLayout, QPushButton
 
 
@@ -34,37 +34,55 @@ from napari_plugin_engine import napari_hook_implementation
 # def napari_experimental_provide_dock_widget():
 #     return MyWidget
 
-from magicgui.widgets import FileEdit, Label, Container, ProgressBar, PushButton
-from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
-from magicgui import magicgui
-from pathlib import Path
-from napari import Viewer
-import napari
+# _________________________________________
+
+# from napari_plugin_engine import napari_hook_implementation
+# from magicgui.widgets import FileEdit, Label, Container, ProgressBar, PushButton
+# from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
+# from magicgui import magicgui
+# from pathlib import Path
+# from napari import Viewer
+# import napari
 
 
-def mywidget(napari_viewer: napari.viewer.Viewer):
-    # make some widgets
-    file_picker = FileEdit(label='Model file path:', value='')
-    label = Label(label='Uploaded model:', value=file_picker.value)
-    button = PushButton(label='Predict')
-    progress = ProgressBar(label='Prediction mapping:', visible=False, value = 0, min = 0, max=1)
+# def mywidget(napari_viewer: napari.viewer.Viewer):
+#     # make some widgets
+#     file_picker = FileEdit(label='Model file path:', value='')
+#     label = Label(label='Uploaded model:', value=file_picker.value)
+#     button = PushButton(label='Predict')
+#     progress = ProgressBar(label='Prediction mapping:', visible=False, value = 0, min = 0, max=1)
 
-    #set up callbacks
-    def set_label(event):
-        label.value = file_picker.value.name
+#     #set up callbacks
+#     def set_label(event):
+#         label.value = file_picker.value.name
 
-    def prediction(event):
-        progress.visible = True
-        yapic_prediction(file_picker.value, napari_viewer, progress)
+#     def prediction(event):
+#         progress.visible = True
+#         yapic_prediction(file_picker.value, napari_viewer, progress)
             
 
-    file_picker.changed.connect(set_label)
-    button.changed.connect(prediction)
+#     file_picker.changed.connect(set_label)
+#     button.changed.connect(prediction)
 
-    # create a container to hold the widgets:
-    container = Container(widgets=[file_picker, label, button, progress])
-    return container, {'area':'left'}
+#     # create a container to hold the widgets:
+#     container = Container(widgets=[file_picker, label, button, progress])
+#     return container, {'area':'left'}
+
+# @napari_hook_implementation
+# def napari_experimental_provide_dock_widget():
+#     return mywidget
+
+# _________________________________________________________________
+
+from magicgui import magic_factory
+from napari_plugin_engine import napari_hook_implementation
+
+@magic_factory(auto_call=True, threshold={'max': 2 ** 16})
+def threshold(
+    data: 'napari.types.ImageData', threshold: int
+) -> 'napari.types.LabelsData':
+    return (data > threshold).astype(int)
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
-    return mywidget, napari.viewer.Viewer
+    return threshold
