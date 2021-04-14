@@ -66,5 +66,5 @@ def mywidget(napari_viewer: napari.viewer.Viewer):
     return container, {'area':'left'}
 
 @napari_hook_implementation
-def napari_experimental_provide_dock_widget():
+def napari_experimental_provide_dock_widget(napari_viewer):
     return mywidget
