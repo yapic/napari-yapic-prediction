@@ -69,7 +69,7 @@ def mywidget(napari_viewer: napari.viewer.Viewer):
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
-    return mywidget
+    return mywidget, {'napari_viewer': napari.viewer.Viewer}
 
 # _________________________________________________________________
 
