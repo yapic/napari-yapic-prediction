@@ -8,6 +8,7 @@ Replace code below according to your needs.
 """
 from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog
 from napari_plugin_engine import napari_hook_implementation
+from pathlib import Path
 
 class MyWidget(QWidget):
     def __init__(self, napari_viewer):
@@ -21,8 +22,9 @@ class MyWidget(QWidget):
         btn = QPushButton('Click me!', self)
         def load_model():
             file_name, _ = QFileDialog.getOpenFileName(self, 'Select Model File', 'Model files (*.h5)')
-            model_name.setText('Selected model: {}'.format(file_name.name))
-            return 'hola.h5'
+            file_path = Path(file_name)
+            model_name.setText('Selected model: {}'.format(file_path.name))
+            return file_path
         btn.clicked.connect(load_model)
         
         model_name = QLabel()
