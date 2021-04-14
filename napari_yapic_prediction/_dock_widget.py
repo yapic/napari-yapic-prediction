@@ -39,9 +39,10 @@ from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_pr
 from magicgui import magicgui
 from pathlib import Path
 from napari import Viewer
+import napari
 
 
-def mywidget(napari_viewer: Viewer):
+def mywidget(napari_viewer: napari.viewer.Viewer):
     # make some widgets
     file_picker = FileEdit(label='Model file path:', value='')
     label = Label(label='Uploaded model:', value=file_picker.value)
