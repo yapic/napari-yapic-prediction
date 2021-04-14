@@ -1,4 +1,4 @@
-from yapic_pred_session import NapariSession
+from napari_yapic_prediction.yapic_dependencies.yapic_pred_session import NapariSession
 from skimage import io
 import numpy as np
 import os

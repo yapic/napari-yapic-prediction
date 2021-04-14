@@ -1,5 +1,5 @@
 from yapic.session import Session
-from yapic_connector import NapariInConnector
+from napari_yapic_prediction.yapic_dependencies.yapic_connector import NapariInConnector
 from yapic_io.prediction_batch import PredictionBatch
 from yapic_io.dataset import Dataset
 import logging
