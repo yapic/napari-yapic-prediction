@@ -7,7 +7,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 Replace code below according to your needs.
 """
 from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
-from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog
+from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar
 from napari_plugin_engine import napari_hook_implementation
 from pathlib import Path
 
@@ -47,7 +47,7 @@ class MyWidget(QWidget):
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
-    return MyWidget
+    return MyWidget, {'area':'left'}
 
 # _________________________________________
 
