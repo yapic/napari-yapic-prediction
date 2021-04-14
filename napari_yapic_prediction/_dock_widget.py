@@ -6,7 +6,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 
 Replace code below according to your needs.
 """
-from qtpy.QtWidgets import QWidget
+from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton
 from napari_plugin_engine import napari_hook_implementation
 
 class MyWidget(QWidget):
