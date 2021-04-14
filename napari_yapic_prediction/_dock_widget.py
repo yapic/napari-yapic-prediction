@@ -10,6 +10,7 @@ from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_pr
 from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar
 from napari_plugin_engine import napari_hook_implementation
 from pathlib import Path
+from PyQt5 import QtCore
 
 class MyWidget(QWidget):
     def __init__(self, napari_viewer):
@@ -26,6 +27,7 @@ class MyWidget(QWidget):
         btn1.clicked.connect(self.load_model)
         
         self.model_name = QLabel('Selected Model:')
+        self.model_name.setAlignment(QtCore.Qt.AlignCenter)
         
         btn2 = QPushButton('Predict', self)
         btn2.clicked.connect(self.predict)
