@@ -6,7 +6,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 
 Replace code below according to your needs.
 """
-from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel
+from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog
 from napari_plugin_engine import napari_hook_implementation
 
 class MyWidget(QWidget):
@@ -19,10 +19,11 @@ class MyWidget(QWidget):
 
         # add a button
         btn = QPushButton('Click me!', self)
-        def trigger():
+        def load_model():
+            file_name, _ = QFileDialog.getOpenFileName(self, 'pollo')
             model_name.setText('Selected model: {}'.format('hola'))
             return 'hola.h5'
-        btn.clicked.connect(trigger)
+        btn.clicked.connect(>)
         
         model_name = QLabel()
         
