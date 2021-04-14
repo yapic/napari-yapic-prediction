@@ -6,6 +6,7 @@ see: https://napari.org/docs/dev/plugins/hook_specifications.html
 
 Replace code below according to your needs.
 """
+from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
 from qtpy.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog
 from napari_plugin_engine import napari_hook_implementation
 from pathlib import Path
@@ -14,26 +15,34 @@ class MyWidget(QWidget):
     def __init__(self, napari_viewer):
         self.viewer = napari_viewer
         super().__init__()
+        
+        self.model_path = None
 
         # initialize layout
         layout = QGridLayout()
 
         # add a button
-        btn = QPushButton('Click me!', self)
-        def load_model():
-            file_name, _ = QFileDialog.getOpenFileName(self, 'Select Model File', 'Model files (*.h5)')
-            file_path = Path(file_name)
-            model_name.setText('Selected model: {}'.format(file_path.name))
-            return file_path
-        btn.clicked.connect(load_model)
+        btn1 = QPushButton('Upload a YAPiC Model', self)
+        btn1.clicked.connect(load_model)
         
         model_name = QLabel()
+        
+        btn2 = QPushButton('Predict', self)
+        btn2.clicked.connect(predict)
         
         layout.addWidget(btn)
         layout.addWidget(model_name)
 
         # activate layout
         self.setLayout(layout)
+        
+    def load_model(self):
+        file_name, _ = QFileDialog.getOpenFileName(self, 'Select Model File', 'Model files (*.h5)')
+        self.model_path = Path(file_name)
+        model_name.setText('Selected model: {}'.format(self.model_path.name))
+        
+    def predict(self):
+        yapic_prediction(self.model_path, self.viewer, None)
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
