@@ -24,7 +24,7 @@ class MyWidget(QWidget):
         btn.clicked.connect(trigger)
         
         model_name = QLabel()
-        model_name.setText('Selected model: {}'.format())
+        model_name.setText('Selected model: {}'.format(trigger()))
         
         layout.addWidget(btn)
         layout.addWidget(model_name)
