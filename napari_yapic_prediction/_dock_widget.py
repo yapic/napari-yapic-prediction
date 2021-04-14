@@ -39,12 +39,12 @@
 from napari_plugin_engine import napari_hook_implementation
 from magicgui.widgets import FileEdit, Label, Container, ProgressBar, PushButton
 from napari_yapic_prediction.yapic_dependencies.yapic_prediction import yapic_prediction
-from magicgui import magicgui
+from magicgui import magicgui, magic_factory
 from pathlib import Path
 from napari import Viewer
 import napari
 
-
+@magic_factory
 def mywidget(napari_viewer: napari.viewer.Viewer):
     # make some widgets
     file_picker = FileEdit(label='Model file path:', value='')
@@ -70,7 +70,7 @@ def mywidget(napari_viewer: napari.viewer.Viewer):
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
-    return mywidget()
+    return mywidget
 
 # _________________________________________________________________
 
