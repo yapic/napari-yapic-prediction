@@ -26,17 +26,24 @@ class MyWidget(QWidget):
         btn1 = QPushButton('Upload a YAPiC Model', self)
         btn1.clicked.connect(self.load_model)
         
-        self.model_name = QLabel('Please select a model')
+        self.model_name = QLabel('')
         self.model_name.setAlignment(QtCore.Qt.AlignCenter)
         
         btn2 = QPushButton('Predict', self)
         btn2.clicked.connect(self.predict)
         
-        self.horizontalGroupBox = QGroupBox("Grid")
+        self.horizontalGroupBox = QGroupBox()
+        progress_layout = QHBoxLayout()
+        self.progres_label = QLabel('Mapping:')
+        self.progress = QProgressBar()
+        progress_layout.addWidget(self.progres_label)
+        progress_layout.addWidget(self.progress)
+        
         
         layout.addWidget(btn1)
         layout.addWidget(self.model_name)
         layout.addWidget(btn2)
+        layout.addWidget(progress_layout)
 
         # activate layout
         self.setLayout(layout)
