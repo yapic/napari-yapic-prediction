@@ -5,4 +5,4 @@ napari
 yapic
 pathlib
 functools
-skimage
+scikit-image
