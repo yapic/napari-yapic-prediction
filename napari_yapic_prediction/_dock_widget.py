@@ -57,6 +57,7 @@ class MyWidget(QWidget):
         self.model_name.setText('Selected Model: {}'.format(self.model_path.name))
         
     def predict(self):
+        self.progress_label.setText('Mapping:')
         yapic_prediction(self.model_path, self.viewer, self.progres_label, self.progress)
 
 @napari_hook_implementation
