@@ -6,7 +6,7 @@
 [![tests](https://github.com/dlesmesl/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/dlesmesl/napari-yapic-prediction/actions)
 [![codecov](https://codecov.io/gh/dlesmesl/napari-yapic-prediction/branch/master/graph/badge.svg)](https://codecov.io/gh/dlesmesl/napari-yapic-prediction)
 
-Napari widget plugin to perform yapic model segmentation prediction in the napari window
+Napari widget plugin to perform YAPiC model segmentation prediction in the napari window
 
 ----------------------------------
 
@@ -19,6 +19,10 @@ https://github.com/napari/cookiecutter-napari-plugin#getting-started
 and review the napari docs for plugin developers:
 https://napari.org/docs/plugins/index.html
 -->
+
+## Description
+
+This Napari plugin provides a widget to upload a [YAPiC](https://yapic.github.io/yapic/) trained model and perform segmentation over all the present images in the Napari window. The segmentation results are uploaded as Napari layers into the viewer automatically with the name structure of *imgename_prediction*. 
 
 ## Installation
 
