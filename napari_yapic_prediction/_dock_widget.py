@@ -36,7 +36,7 @@ class MyWidget(QWidget):
         progress_layout = QHBoxLayout()
         self.progress_label = QLabel('Mapping:')
         self.progress = QProgressBar()
-        progress_layout.addWidget(self.progres_label)
+        progress_layout.addWidget(self.progress_label)
         progress_layout.addWidget(self.progress)
         
         self.horizontalGroupBox.setLayout(progress_layout)
