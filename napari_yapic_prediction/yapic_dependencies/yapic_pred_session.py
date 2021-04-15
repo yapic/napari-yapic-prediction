@@ -45,8 +45,8 @@ class NapariSession(Session):
         print('multichannel output: {}'.format(data_predict.multichannel))
 
         for item_nr, item in enumerate(data_predict):
-            progress_bar.setValue(100 * (item_nr + 1) / len(data_predict))
             result = self.model.predict(item.pixels())
             item.put_probmap_data(result)
+            progress_bar.setValue(100 * (item_nr + 1) / len(data_predict))
 
         sys.stdout.write('Writing probability maps finished.\n')
