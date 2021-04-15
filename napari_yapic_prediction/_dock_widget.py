@@ -34,7 +34,7 @@ class MyWidget(QWidget):
         
         self.horizontalGroupBox = QGroupBox()
         progress_layout = QHBoxLayout()
-        self.progres_label = QLabel('Mapping:')
+        self.progress_label = QLabel('Mapping:')
         self.progress = QProgressBar()
         progress_layout.addWidget(self.progres_label)
         progress_layout.addWidget(self.progress)
@@ -58,7 +58,7 @@ class MyWidget(QWidget):
         
     def predict(self):
         self.progress_label.setText('Mapping:')
-        yapic_prediction(self.model_path, self.viewer, self.progres_label, self.progress)
+        yapic_prediction(self.model_path, self.viewer, self.progress_label, self.progress)
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():
