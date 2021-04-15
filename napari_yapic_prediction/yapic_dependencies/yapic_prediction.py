@@ -13,7 +13,7 @@ def tif_2_layer(tif_path):
             label_output[x, y] = np.argmax(pixel_probs)
     return label_output.astype(int)
 
-def yapic_prediction(model_path, viewer, progress_bar):
+def yapic_prediction(model_path, viewer, progress_label, progress_bar):
     assert os.path.isfile(model_path) and os.path.splitext(model_path)[-1] == '.h5', '<network> must be a h5 model file'
     
     # temporal folder creation
@@ -28,8 +28,8 @@ def yapic_prediction(model_path, viewer, progress_bar):
     s.set_normalization('local')
     s.predict(True, progress_bar)
     
-    # progress_bar.label = 'Uploading labels:'
-    # progress_bar.value = 0
+    progress_label.setText('Uploading:')
+    progress_bar.setValue(0)
     
     # Adding to Napari
     files2upload = os.listdir(tmp_dir)
@@ -41,7 +41,7 @@ def yapic_prediction(model_path, viewer, progress_bar):
         label_data = tif_2_layer(file_path)
         viewer.add_labels(label_data, name='{}_prediction'.format(label_name))
         os.remove(file_path)
-        # progress_bar.value = (i + 1) / N
+        progress_bar.setValue((i + 1) * 100 / N)
         
     # Deleting temporal folder
     os.rmdir(tmp_dir)
