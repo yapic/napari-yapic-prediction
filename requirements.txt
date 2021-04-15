@@ -3,6 +3,4 @@ tensorflow
 numpy
 napari
 yapic
-pathlib
-functools
 scikit-image
