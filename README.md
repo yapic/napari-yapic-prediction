@@ -1,6 +1,6 @@
 # napari-yapic-prediction
 
-[![License](https://img.shields.io/pypi/l/napari-yapic-prediction.svg?color=green)](https://github.com/dlesmesl/napari-yapic-prediction/raw/master/LICENSE)
+[![License](https://img.shields.io/pypi/l/napari-yapic-prediction.svg?color=green)](https://github.com/yapic/napari-yapic-prediction/raw/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/napari-yapic-prediction.svg?color=green)](https://pypi.org/project/napari-yapic-prediction)
 [![Python Version](https://img.shields.io/pypi/pyversions/napari-yapic-prediction.svg?color=green)](https://python.org)
 [![tests](https://github.com/yapic/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/yapic/napari-yapic-prediction/actions)
