@@ -4,7 +4,7 @@
 [![PyPI](https://img.shields.io/pypi/v/napari-yapic-prediction.svg?color=green)](https://pypi.org/project/napari-yapic-prediction)
 [![Python Version](https://img.shields.io/pypi/pyversions/napari-yapic-prediction.svg?color=green)](https://python.org)
 [![tests](https://github.com/yapic/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/yapic/napari-yapic-prediction/actions)
-[![codecov](https://codecov.io/gh/yapic/napari-yapic-prediction/branch/master/graph/badge.svg)](https://codecov.io/gh/yapic/napari-yapic-prediction)
+[![codecov](https://codecov.io/gh/yapic/napari-yapic-prediction/branch/master/graph/badge.svg?token=amah2YwOpx)](https://codecov.io/gh/yapic/napari-yapic-prediction)
 
 Napari widget plugin to perform YAPiC model segmentation prediction in the napari window.
 
