@@ -22,7 +22,10 @@ with open('requirements.txt') as f:
 
 
 # https://github.com/pypa/setuptools_scm
-use_scm = {"write_to": "napari_yapic_prediction/_version.py"}
+# use_scm = {"write_to": "napari_yapic_prediction/_version.py"}
+
+def local_scheme(version):
+    return ""
 
 setup(
     name='napari-yapic-prediction',
@@ -36,7 +39,7 @@ setup(
     packages=find_packages(),
     python_requires='>=3.6',
     install_requires=requirements,
-    use_scm_version=use_scm,
+    use_scm_version={"local_scheme": local_scheme},
     setup_requires=['setuptools_scm'],
     classifiers=[
         'Development Status :: 4 - Beta',
