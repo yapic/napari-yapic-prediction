@@ -3,10 +3,10 @@
 [![License](https://img.shields.io/pypi/l/napari-yapic-prediction.svg?color=green)](https://github.com/dlesmesl/napari-yapic-prediction/raw/master/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/napari-yapic-prediction.svg?color=green)](https://pypi.org/project/napari-yapic-prediction)
 [![Python Version](https://img.shields.io/pypi/pyversions/napari-yapic-prediction.svg?color=green)](https://python.org)
-[![tests](https://github.com/dlesmesl/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/dlesmesl/napari-yapic-prediction/actions)
-[![codecov](https://codecov.io/gh/dlesmesl/napari-yapic-prediction/branch/master/graph/badge.svg)](https://codecov.io/gh/dlesmesl/napari-yapic-prediction)
+[![tests](https://github.com/yapic/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/yapic/napari-yapic-prediction/actions)
+[![codecov](https://codecov.io/gh/yapic/napari-yapic-prediction/branch/master/graph/badge.svg)](https://codecov.io/gh/yapic/napari-yapic-prediction)
 
-Napari widget plugin to perform YAPiC model segmentation prediction in the napari window
+Napari widget plugin to perform YAPiC model segmentation prediction in the napari window.
 
 ----------------------------------
 
@@ -22,7 +22,7 @@ https://napari.org/docs/plugins/index.html
 
 ## Description
 
-This Napari plugin provides a widget to upload a [YAPiC](https://yapic.github.io/yapic/) trained model and perform segmentation over all the present images in the Napari window. The segmentation results are uploaded as Napari layers into the viewer automatically with the name structure of *imgename_prediction*. 
+This Napari plugin provides a widget to upload a [YAPiC] trained model and perform segmentation over all the present images in the Napari window. The segmentation results are uploaded as Napari layers into the viewer automatically with the name structure of *imgename_prediction*. 
 
 ## Installation
 
@@ -54,8 +54,9 @@ If you encounter any problems, please [file an issue] along with a detailed desc
 [Apache Software License 2.0]: http://www.apache.org/licenses/LICENSE-2.0
 [Mozilla Public License 2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
 [cookiecutter-napari-plugin]: https://github.com/napari/cookiecutter-napari-plugin
-[file an issue]: https://github.com/dlesmesl/napari-yapic-prediction/issues
+[file an issue]: https://github.com/yapic/napari-yapic-prediction/issues
 [napari]: https://github.com/napari/napari
 [tox]: https://tox.readthedocs.io/en/latest/
 [pip]: https://pypi.org/project/pip/
 [PyPI]: https://pypi.org/
+[YAPiC]: https://yapic.github.io/yapic/
