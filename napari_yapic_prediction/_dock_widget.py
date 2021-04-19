@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QLabel, QFileDialog, QProgressBar, QHBoxLayout, QGroupBox
 from napari_plugin_engine import napari_hook_implementation
+from napari_yapic_prediction._dock_widget import napari_experimental_provide_dock_widget
 from .yapic_prediction import yapic_prediction
 from pathlib import Path
 from PyQt5 import QtCore
