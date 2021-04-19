@@ -26,7 +26,11 @@ This Napari plugin provides a widget to upload a [YAPiC] trained model and perfo
 
 ## Installation
 
-You can install `napari-yapic-prediction` via [pip]:
+1. Please install either GPU or CPU version of tensorflow before installing the plugin depending on your system.
+One of the plugin dependency is `yapic` that currently has sensitivity to tensorflow versions.
+This behaviour will be removed in future.
+
+2. You can install `napari-yapic-prediction` via [pip]:
 
     pip install napari-yapic-prediction
 
