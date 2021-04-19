@@ -29,7 +29,7 @@ setup(
     author='Duway Nicolas Lesmes Leon',
     author_email='dlesmesleon@hotmail.com',
     license='GNU GPL v3.0',
-    url='https://github.com/dlesmesl/napari-yapic-prediction',
+    url='https://github.com/yapic/napari-yapic-prediction',
     description='Napari widget plugin to perform yapic model segmentation prediction in the napari window',
     long_description=read('README.md'),
     long_description_content_type='text/markdown',
