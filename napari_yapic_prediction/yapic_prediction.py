@@ -1,9 +1,22 @@
 from .yapic_dependencies import NapariSession
 from skimage import io
 import numpy as np
+import h5py
 import os
 
-def tif_2_layer(tif_path):
+
+def get_lbl_map(model_path):
+    """Returns a dictionary retriving the label mapping done by Yapic.
+    
+    Keys: Napari label values.
+    Values: YAPiC label mapping.
+    """
+    f = h5py.File(model_path, 'r')
+    map_dataset = f['lbl_map']
+    return {nap: yap for yap, nap in map_dataset}
+    
+    
+def tif_2_layer(tif_path, lbl_map):
     """Reads temporal tiff file and returns a numpy array. Tiff file is deleted before within the function."""
     img_data = io.imread(tif_path)
     width, height, _ = img_data.shape
@@ -11,7 +24,8 @@ def tif_2_layer(tif_path):
     for x in range(width):
         for y in range(height):
             pixel_probs = img_data[x, y]
-            label_output[x, y] = np.argmax(pixel_probs)
+            max_index = np.argmax(pixel_probs)
+            label_output[x, y] = lbl_map[max_index + 1]
     os.remove(tif_path)
     return label_output.astype(int)
 
@@ -36,6 +50,9 @@ def yapic_prediction(model_path, viewer, progress_label, progress_bar):
     tmp_dir = os.path.join(work_dir, 'tmp')
     os.mkdir(tmp_dir)
     
+    # Geting label mapping values (dictionary)
+    lbl_map = get_lbl_map(model_path)
+    
     # predicting
     s = NapariSession()
     s.load_prediction_data(viewer, tmp_dir)
@@ -54,7 +71,7 @@ def yapic_prediction(model_path, viewer, progress_label, progress_bar):
     for i, label_file in enumerate(files2upload):
         file_path = os.path.join(tmp_dir, label_file)
         label_name = label_file.split('.')[0]
-        label_data = tif_2_layer(file_path)
+        label_data = tif_2_layer(file_path, lbl_map)
         viewer.add_labels(label_data, name='{}_prediction'.format(label_name))
         progress_bar.setValue((i + 1) * 100 / N)
         
