@@ -22,18 +22,25 @@ class MyWidget(QWidget):
         btn_predict = QPushButton('Predict', self)
         btn_predict.clicked.connect(self.predict)
         
-        horizontalGroupBox = QGroupBox()
-        progress_layout = QHBoxLayout()
-        self.progress_label = QLabel('Mapping:')
-        self.progress = QProgressBar()
-        progress_layout.addWidget(self.progress_label)
-        progress_layout.addWidget(self.progress)
-        horizontalGroupBox.setLayout(progress_layout)
+        GroupBox = QGroupBox()
+        progress_layout = QGridLayout()
         
+        self.progress_map_label = QLabel('Mapping:')
+        self.progress_map = QProgressBar()
+        self.progress_upload_label = QLabel('Uploading:')
+        self.progress_upload = QProgressBar()
+        
+        progress_layout.addWidget(self.progress_map_label, 0, 0)
+        progress_layout.addWidget(self.progress_map, 0, 1)
+        progress_layout.addWidget(self.progress_upload_label, 1, 0)
+        progress_layout.addWidget(self.progress_upload, 1, 1)
+        
+        GroupBox.setLayout(progress_layout)
+
         layout.addWidget(btn_upload)
         layout.addWidget(self.model_name)
         layout.addWidget(btn_predict)
-        layout.addWidget(horizontalGroupBox)
+        layout.addWidget(GroupBox)
 
         self.setLayout(layout)
         
@@ -43,8 +50,9 @@ class MyWidget(QWidget):
         self.model_name.setText('Selected Model: {}'.format(self.model_path.name))
         
     def predict(self):
-        self.progress_label.setText('Mapping:')
-        yapic_prediction(self.model_path, self.viewer, self.progress_label, self.progress)
+        self.progress_map.setValue(0)
+        self.progress_upload.setValue(0)
+        yapic_prediction(self.model_path, self.viewer, self.progress_map, self.progress_upload)
 
 @napari_hook_implementation
 def napari_experimental_provide_dock_widget():

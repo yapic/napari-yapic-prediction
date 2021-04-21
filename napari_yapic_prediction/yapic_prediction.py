@@ -32,7 +32,8 @@ def tif_2_layer(tif_path, lbl_map):
     os.remove(tif_path)
     return label_output.astype(int)
 
-def yapic_prediction(model_path, viewer, progress_label, progress_bar):
+
+def yapic_prediction(model_path, viewer, progress_map, progress_upload):
     """This function adds the label layers corresponding to the prediction of all the images uploaded in the Napari viewer.
     
     Parameters
@@ -43,7 +44,9 @@ def yapic_prediction(model_path, viewer, progress_label, progress_bar):
             Napari viewer instance.
         progress_label : PyQt5.QtWidgets.QLabel
             PyQt label instance - Progress bar label.
-        progress_bar : PyQt5.QtWidgets.QProgressBar
+        progress_map : PyQt5.QtWidgets.QProgressBar
+            PyQt progress bar instance.
+        progress_upload : PyQt5.QtWidgets.QProgressBar
             PyQt progress bar instance.
     """
     assert os.path.isfile(model_path) and os.path.splitext(model_path)[-1] == '.h5', '<network> must be a h5 model file'
@@ -61,11 +64,7 @@ def yapic_prediction(model_path, viewer, progress_label, progress_bar):
     s.load_prediction_data(viewer, tmp_dir)
     s.load_model(model_path)
     s.set_normalization('local')
-    s.predict(True, progress_bar)
-    
-    # Widget update
-    progress_label.setText('Uploading:')
-    progress_bar.setValue(0)
+    s.predict(True, progress_map)
     
     # Adding to Napari
     files2upload = os.listdir(tmp_dir)
@@ -76,7 +75,7 @@ def yapic_prediction(model_path, viewer, progress_label, progress_bar):
         label_name = label_file.split('.')[0]
         label_data = tif_2_layer(file_path, lbl_map)
         viewer.add_labels(label_data, name='{}_prediction'.format(label_name))
-        progress_bar.setValue((i + 1) * 100 / N)
+        progress_upload.setValue((i + 1) * 100 / N)
         
     # Deleting temporal folder
     os.rmdir(tmp_dir)
