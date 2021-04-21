@@ -19,13 +19,16 @@ def get_lbl_map(model_path):
 def tif_2_layer(tif_path, lbl_map):
     """Reads temporal tiff file and returns a numpy array. Tiff file is deleted before within the function."""
     img_data = io.imread(tif_path)
-    width, height, _ = img_data.shape
-    label_output = np.zeros((width, height))
-    for x in range(width):
-        for y in range(height):
-            pixel_probs = img_data[x, y]
-            max_index = np.argmax(pixel_probs)
-            label_output[x, y] = lbl_map[max_index + 1]
+    if img_data.shape == 3:
+        img_data = np.expand_dims(img_data, axis=0)
+    depth, width, height, _ = img_data.shape
+    label_output = np.zeros((depth, width, height))
+    for z in range(depth):
+        for x in range(width):
+            for y in range(height):
+                pixel_probs = img_data[z, x, y]
+                max_index = np.argmax(pixel_probs)
+                label_output[z, x, y] = lbl_map[max_index + 1]
     os.remove(tif_path)
     return label_output.astype(int)
 
