@@ -1,9 +1,9 @@
 from yapic_io.prediction_batch import PredictionBatch
 from yapic_io.tiff_connector import TiffConnector
-from bigtiff import Tiff, PlaceHolder
 from yapic_io.dataset import Dataset
 from yapic.session import Session
 from functools import lru_cache
+from tifffile import memmap
 from pathlib import Path
 
 import yapic_io.utils as ut
@@ -105,7 +105,7 @@ class NapariInConnector(TiffConnector):
             data = np.expand_dims(data, axis=-1)  # channel dim
         elif len(data.shape) == 3:  # RGB image (z, y, x, c)
             data = np.expand_dims(data, axis=0)  # z dim
-        # arranging dimensions desired (c, z, x, y)
+        # arranging desired dimensions (c, z, x, y)
         data = np.moveaxis(data, (0, 1, 3), (1, 3, 0))
         return data
 
@@ -146,7 +146,6 @@ class NapariInConnector(TiffConnector):
         """Minor change in the file and path definition."""
         # memmap is slow, so we must cache it to be fast!
         fname = self.filenames[image_nr].img
-        T = 1  # time frame in output probmap
         if multichannel:
             fname = Path('{}.tif'.format(fname))
             n_classes = multichannel
@@ -155,8 +154,9 @@ class NapariInConnector(TiffConnector):
             fname = Path('{}_class_{}.tif'.format(fname, label_value))
             C = 1  # channel in output probmap
         path = self.savepath / fname
-        if not path.exists():
+
+        if not path.exists():  # created "empty" tif of shape
             _, Z, X, Y = self.image_dimensions(image_nr)
-            images = [PlaceHolder((Y, X, C), 'float32')] * Z
-            Tiff.write(images, io=str(path), imagej_shape=(T, C, Z))
-        return Tiff.memmap_tcz(path)
+            return memmap(path, shape=(Z, Y, X, C), dtype='float32')
+
+        return memmap(path)
