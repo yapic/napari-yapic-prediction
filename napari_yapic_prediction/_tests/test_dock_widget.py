@@ -14,7 +14,7 @@ def test_tif_2_layer():
     img_data = io.imread(im_path)
     tmp_path = './napari_yapic_prediction/_tests/data/leaves_2_tmp.tif'
     io.imsave(tmp_path, img_data)
-    output = tif_2_layer(tmp_path, {1: 1, 2: 2})
+    output = tif_2_layer(tmp_path, {1: 1, 2: 2}, False)
     assert isinstance(output, np.ndarray)
     assert output.shape == (1, 790, 790)
     assert not os.path.exists(tmp_path)
