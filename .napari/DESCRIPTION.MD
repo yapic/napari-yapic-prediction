@@ -10,7 +10,7 @@ In order to make segmentation predictions, the model must be trained in advance,
 
 Before starting using this plugin, please install either the GPU or CPU version of tensorflow in case you do not have it installed.
 
-Once the `napari-yapic-prediction` plugin is installed, click on "Plugins" and click on "napari-yapic-prediction: My Widget". After this, I menu should appear in the bottom left corner of the napari window.
+Once the `napari-yapic-prediction` plugin is installed, click on "Plugins" and click on "napari-yapic-prediction: My Widget". After this, a new menu should appear in the bottom left corner of the napari window.
 
 Click in the "Upload a YAPiC Model" button to browse and upload your model file. The uploaded model name will be displayed in the napari window.
 
