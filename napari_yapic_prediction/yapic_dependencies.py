@@ -25,7 +25,7 @@ class NapariSession(Session):
     def load_prediction_data(self, viewer, save_path):
         '''
         Connect to a prediction dataset.
-        
+
         Parameters
         ----------
         image_path : napari.viewer.Viewer
@@ -64,11 +64,13 @@ class NapariSession(Session):
 
 class NapariInConnector(TiffConnector):
     """YAPiC connector class modification to support napari.viewer as image provider."""
+
     def __init__(self, viewer, label_filepath, savepath=None):
         self.data = viewer.layers
         self.img_path = None
-        img_filenames = [layer.name for layer in viewer.layers if type(layer) == napari.layers.Image]
-        
+        img_filenames = [layer.name for layer in viewer.layers if type(
+            layer) == napari.layers.Image]
+
         self.label_path, lbl_filenames = self._handle_lbl_filenames(
             label_filepath)
 
@@ -99,11 +101,10 @@ class NapariInConnector(TiffConnector):
         """No memmap required when using the napari viewer."""
         im_name = self.filenames[image_nr].img
         data = self.data[im_name].data
-        # adding the four dimensions (z, y, x, c)
-        if len(data.shape) == 2:  # BW image with a single channel
-            data = np.expand_dims(data, axis=0)  # z dim
+        if not self.data[im_name].rgb:  # image has no channel dim
             data = np.expand_dims(data, axis=-1)  # channel dim
-        elif len(data.shape) == 3:  # RGB image (z, y, x, c)
+        # adding the four dimensions (z, y, x, c)
+        if len(data.shape) == 3:  # RGB image (z, y, x, c)
             data = np.expand_dims(data, axis=0)  # z dim
         # arranging desired dimensions (c, z, x, y)
         data = np.moveaxis(data, (0, 1, 3), (1, 3, 0))
@@ -112,32 +113,32 @@ class NapariInConnector(TiffConnector):
     def image_dimensions(self, image_nr):
         img = self._open_image_file(image_nr)
         return img.shape
-    
+
     def original_label_values_for_all_images(self):
         """Empty return since no label path is required."""
         return []
-    
+
     def _assemble_filenames(self, pairs):
         self.filenames = [FilePair(img, Path(lbl) if lbl else None)
                           for img, lbl in pairs]
-        
+
     def check_label_matrix_dimensions(self):
         """True return since label path is not required"""
         return True
-    
+
     @lru_cache(maxsize=10)
     def _open_label_file(self, image_nr):
         """No label path required"""
         return None
-        
+
     def get_tile(self, image_nr, pos, size):
         """Modification from TiffConnector to get a tile from numpy array."""
         C, Z, X, Y = pos
-        CC, ZZ, XX, YY = np.array(pos) + size # offset
+        CC, ZZ, XX, YY = np.array(pos) + size  # offset
         slices = self._open_image_file(image_nr)
         tile = slices[C:CC, Z: ZZ, X: XX, Y: YY]
         return tile.astype('float')
-    
+
     @lru_cache(maxsize=10)
     def _open_probability_map_file(self,
                                    image_nr,
