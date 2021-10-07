@@ -32,7 +32,7 @@ This behaviour will be removed in future.
 
 2. You can install `napari-yapic-prediction` via [pip]:
 
-    pip install napari-yapic-prediction
+    ```pip install napari-yapic-prediction```
 
 ## Contributing
 
