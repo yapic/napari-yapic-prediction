@@ -32,8 +32,7 @@ def local_scheme(version):
 setup(
     name='napari-yapic-prediction',
     author='Duway Nicolas Lesmes Leon, Pranjal Dhole',
-    author_email=('dlesmesleon@hotmail.com, ',
-                  'dhole.pranjal@gmail.com'),
+    author_email=('dlesmesleon@hotmail.com, dhole.pranjal@gmail.com'),
     license='GNU GPL v3.0',
     url='https://github.com/yapic/napari-yapic-prediction',
     description='Napari widget plugin to perform yapic model segmentation prediction in the napari window',
