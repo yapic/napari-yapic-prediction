@@ -6,7 +6,7 @@
 [![tests](https://github.com/yapic/napari-yapic-prediction/workflows/tests/badge.svg)](https://github.com/yapic/napari-yapic-prediction/actions)
 [![codecov](https://codecov.io/gh/yapic/napari-yapic-prediction/branch/master/graph/badge.svg?token=amah2YwOpx)](https://codecov.io/gh/yapic/napari-yapic-prediction)
 
-INSTALL TENSORFLOW BEFORE INSTALLING THE PLUGIN. A napari widget plugin to perform YAPiC model segmentation prediction in the napari window. 
+A napari widget plugin to perform YAPiC model segmentation prediction in the napari window. 
 
 ----------------------------------
 
@@ -26,9 +26,8 @@ This napari plugin provides a widget to upload a [YAPiC] trained model and perfo
 
 ## Installation
 
-1. Please install either GPU or CPU version of tensorflow before installing the plugin depending on your system.
+1. Please install either GPU or CPU version of tensorflow that is compatible with your `cuda` and `cudnn` libraries before installing the plugin depending on your system.
 One of the plugin dependency is `yapic` that currently has sensitivity to tensorflow versions.
-This behaviour will be removed in future.
 
 2. You can install `napari-yapic-prediction` via [pip]:
 
