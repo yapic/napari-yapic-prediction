@@ -7,3 +7,10 @@ project_urls:
     Report Issues: https://github.com/yapic/napari-yapic-prediction/issues
     Documentation: https://yapic.github.io/napari-yapic-prediction/
 
+
+# Add labels from the EDAM Bioimaging ontology
+labels:
+  ontology: EDAM-BIOIMAGING:alpha06
+  terms:
+  - Model-based segmentation
+  - Pixel classification
