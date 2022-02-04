@@ -38,6 +38,7 @@ class NapariSession(Session):
             viewer, '/tmp/this_should_not_exist', savepath=save_path))
         msg = '\n\nImport dataset for prediction:\n{}\n'.format(
             self.dataset.pixel_connector.__repr__())
+        self.batch_size = 1
         sys.stdout.write(msg)
 
     def predict(self, multichannel=False, progress_bar=None):
