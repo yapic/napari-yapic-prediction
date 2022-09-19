@@ -50,8 +50,9 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
     ],
     entry_points={
-        'napari.plugin': [
-            'napari-yapic-prediction = napari_yapic_prediction',
+        "napari.manifest": [
+            "napari-yapic-prediction = napari_yapic_prediction:napari.yaml",
         ],
     },
+    package_data={"napari_yapic_prediction": ["napari.yaml"]},
 )

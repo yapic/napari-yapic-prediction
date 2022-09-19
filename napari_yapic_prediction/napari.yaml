@@ -1,0 +1,10 @@
+name: napari-yapic-prediction
+schema_version: 0.1.0
+contributions:
+  commands:
+  - id: napari-yapic-prediction.MyWidget
+    title: Create My Widget
+    python_name: napari_yapic_prediction._dock_widget:MyWidget
+  widgets:
+  - command: napari-yapic-prediction.MyWidget
+    display_name: My Widget
